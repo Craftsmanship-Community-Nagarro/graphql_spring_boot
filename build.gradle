@@ -24,17 +24,27 @@ repositories {
 }
 
 dependencies {
+	//Spring Boot core dependencies
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-graphql'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.flywaydb:flyway-core'
-	compileOnly 'org.projectlombok:lombok'
+
+	//H2 - Flyway
+	implementation 'org.flywaydb:flyway-core:10.15.0'
 	runtimeOnly 'com.h2database:h2'
+
+	//Lombok
+	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	//Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework:spring-webflux'
 	testImplementation 'org.springframework.graphql:spring-graphql-test'
+	testImplementation 'org.springframework:spring-webflux'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	//Extra
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
 }
 
 tasks.named('test') {
