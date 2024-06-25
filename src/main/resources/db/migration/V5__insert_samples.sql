@@ -11,6 +11,8 @@ insert into country (ENGLISH_NAME, VERSION, CREATED_BY, CREATED_DATE)
 values ('Austria', 0, 'script', CURRENT_TIMESTAMP());
 insert into country (ENGLISH_NAME, VERSION, CREATED_BY, CREATED_DATE)
 values ('Philippines', 0, 'script', CURRENT_TIMESTAMP());
+insert into country (ENGLISH_NAME, VERSION, CREATED_BY, CREATED_DATE)
+values ('Canada', 0, 'script', CURRENT_TIMESTAMP());
 
 
 insert into country_language (ID_COUNTRY, ENGLISH_NAME, VERSION, CREATED_BY, CREATED_DATE)
@@ -27,3 +29,7 @@ insert into country_language (ID_COUNTRY, ENGLISH_NAME, VERSION, CREATED_BY, CRE
 values ((select id from country where english_name = 'Philippines'), 'English', 0, 'script', CURRENT_TIMESTAMP());
 insert into country_language (ID_COUNTRY, ENGLISH_NAME, VERSION, CREATED_BY, CREATED_DATE)
 values ((select id from country where english_name = 'Philippines'), 'Filipino', 0, 'script', CURRENT_TIMESTAMP());
+insert into country_language (ID_COUNTRY, ENGLISH_NAME, VERSION, CREATED_BY, CREATED_DATE)
+values ((select id from country where english_name = 'Canada'), 'English', 0, 'script', CURRENT_TIMESTAMP());
+insert into country_language (ID_COUNTRY, ENGLISH_NAME, VERSION, CREATED_BY, CREATED_DATE)
+values ((select id from country where english_name = 'Canada'), 'French', 0, 'script', CURRENT_TIMESTAMP());

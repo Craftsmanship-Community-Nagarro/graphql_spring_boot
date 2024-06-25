@@ -48,6 +48,18 @@ public class CountryLanguageService {
         .collect(groupByTheName());
   }
 
+  public List<CountryLanguageDTO> findCountryLanguagesByEnglishName(final String englishName) {
+
+    if (Objects.isNull(englishName)) {
+      throw new InvalidCountryLanguageException("English name is null");
+    }
+
+    return this.countryLanguageRepository.findCountryLanguagesByEnglishName(englishName)
+        .stream()
+        .map(this::mapToDTO)
+        .toList();
+  }
+
   private CountryLanguageDTO mapToDTO(final CountryLanguage countryLanguage) {
 
     if (Objects.isNull(countryLanguage)) {
