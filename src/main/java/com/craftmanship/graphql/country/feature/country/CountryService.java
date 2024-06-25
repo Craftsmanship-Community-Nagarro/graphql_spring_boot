@@ -30,6 +30,15 @@ public class CountryService {
     return mapToDTO(this.countryRepository.findByEnglishName(englishName));
   }
 
+  public CountryDTO findById(final Long id) {
+
+    if (Objects.isNull(id)) {
+      throw new InvalidCountryException("Id is null");
+    }
+
+    return mapToDTO(this.countryRepository.findById(id).orElse(null));
+  }
+
   public List<CountryDTO> findAllByOrderByIdDesc() {
     return this.countryRepository.findAllByOrderByIdDesc().stream().map(this::mapToDTO).toList();
   }

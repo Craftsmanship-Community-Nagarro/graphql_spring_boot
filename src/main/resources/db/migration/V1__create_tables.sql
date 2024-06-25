@@ -19,5 +19,6 @@ create table IF NOT EXISTS country_language
     LAST_MODIFIED_BY   varchar(100) null,
     LAST_MODIFIED_DATE timestamp    null,
     PRIMARY KEY (ID),
+    CONSTRAINT UNIQUE_FIELDS UNIQUE (ID_COUNTRY, ENGLISH_NAME),
     FOREIGN KEY (ID_COUNTRY) REFERENCES country (ID)
 );

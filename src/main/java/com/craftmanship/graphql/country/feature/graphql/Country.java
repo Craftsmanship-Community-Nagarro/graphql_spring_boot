@@ -6,5 +6,5 @@ import lombok.With;
 
 @With
 @Builder
-public record Country(Long id, String englishName, List<CountryLanguage> countryLanguages) {
+public record Country(Long id, String englishName, List<CountryLanguage> languages) {
 }

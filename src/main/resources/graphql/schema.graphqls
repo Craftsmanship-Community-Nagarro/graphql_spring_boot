@@ -1,5 +1,6 @@
 type Query {
     country(id: ID!): Country
+    countryByEnglishName(englishName: String!): Country
     countries: [Country!]!
     countryLanguage(id: ID!): CountryLanguage
     countryLanguages: [CountryLanguage!]!
@@ -8,11 +9,11 @@ type Query {
 type Country {
     id: ID!
     englishName: String!
-    languages: [CountryLanguage!]!
+    languages: [CountryLanguage]
 }
 
 type CountryLanguage {
     id: ID!
     englishName: String!
-    countries: [Country!]!
+    countries: [Country]
 }
