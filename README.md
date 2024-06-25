@@ -11,7 +11,7 @@ need, and nothing more, makes it easier to evolve APIs over time, and enables po
 ## Prerequisites
 
 - JDK 21 or later
-- IntelliJ IDEA (optional)
+- IntelliJ IDEA (optional, but highly recommended)
 - Gradle 8.8 or later but it is recommended to use the Gradle wrapper
 
 ## Project Structure
