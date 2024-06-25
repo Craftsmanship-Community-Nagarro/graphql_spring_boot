@@ -1,0 +1,18 @@
+type Query {
+    country(id: ID!): Country
+    countries: [Country!]!
+    countryLanguage(id: ID!): CountryLanguage
+    countryLanguages: [CountryLanguage!]!
+}
+
+type Country {
+    id: ID!
+    englishName: String!
+    languages: [CountryLanguage!]!
+}
+
+type CountryLanguage {
+    id: ID!
+    englishName: String!
+    countries: [Country!]!
+}
