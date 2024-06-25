@@ -3,6 +3,7 @@ package com.craftmanship.graphql.country.feature.country_language;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,19 @@ public class CountryLanguageService {
         .findAllByCountryId(countryId)
         .stream()
         .collect(groupByTheName());
+  }
 
+  public CountryLanguageDTO findByCountryIdAndEnglishName(final Long countryId, final String englishName) {
+    if (Objects.isNull(countryId) || Objects.isNull(englishName)) {
+      throw new InvalidCountryLanguageException("Country id or english name is null");
+    }
+
+    Optional<CountryLanguage> byCountryIdAndEnglishName = this.countryLanguageRepository
+        .findByCountryIdAndEnglishName(countryId, englishName);
+
+    return mapToDTO(byCountryIdAndEnglishName.orElseThrow(() ->
+        new InvalidCountryLanguageException(
+            "Country language not found by country id and english name: " + countryId + " " + englishName)));
   }
 
   public Map<String, List<CountryLanguageDTO>> findAllCountryLanguages() {
