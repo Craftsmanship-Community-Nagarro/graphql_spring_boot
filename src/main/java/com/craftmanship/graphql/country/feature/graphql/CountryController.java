@@ -21,19 +21,50 @@ public class CountryController {
   @QueryMapping
   public Country country(@Argument Long id) {
     try {
-      return getCountry(id);
+      return getCountryById(id);
     } catch (Exception e) {
-      return getEmptyCountry(id);
+      return getEmptyCountryById(id);
     }
   }
 
-  private static Country getEmptyCountry(Long id) {
+  @QueryMapping
+  public Country countryByEnglishName(@Argument String englishName) {
+    try {
+      return getCountryByName(englishName);
+    } catch (Exception e) {
+      return getEmptyCountryByName(englishName);
+    }
+  }
+
+  private Country getCountryByName(String englishName) {
+    return mapDTOToGraphQL(this.countryService.findByEnglishName(englishName));
+  }
+
+  @QueryMapping
+  public List<Country> countries() {
+    List<CountryDTO> allByOrderByIdDesc = this.countryService.findAllByOrderByIdDesc();
+    return allByOrderByIdDesc.stream().map(cDTO ->
+        new Country.CountryBuilder()
+            .englishName(cDTO.englishName())
+            .id(cDTO.id())
+            .languages(getCountryLanguages(cDTO.countryLanguages(), cDTO))
+            .build()).toList();
+  }
+
+
+  private static Country getEmptyCountryById(Long id) {
     return Country.builder().id(Long.valueOf("-1")).englishName("not found given id: " + id).build();
   }
 
-  private Country getCountry(Long id) {
-    final CountryDTO byId = this.countryService.findById(id);
+  private static Country getEmptyCountryByName(String englishName) {
+    return Country.builder().id(Long.valueOf("-1")).englishName("not found given english name: " + englishName).build();
+  }
 
+  private Country getCountryById(Long id) {
+    return mapDTOToGraphQL(this.countryService.findById(id));
+  }
+
+  private Country mapDTOToGraphQL(CountryDTO byId) {
     return Country.builder()
         .id(byId.id())
         .englishName(byId.englishName())
