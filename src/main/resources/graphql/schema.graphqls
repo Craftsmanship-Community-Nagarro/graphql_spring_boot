@@ -6,6 +6,14 @@ type Query {
     countryLanguages: [CountryLanguage!]!
 }
 
+type Mutation {
+    updateCountryName(oldName: String!, newName: String!): Country
+}
+
+type Subscription {
+    populationGrowing: Country
+}
+
 type Country {
     id: ID!
     englishName: String!
