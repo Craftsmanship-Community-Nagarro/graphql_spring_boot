@@ -1,0 +1,6 @@
+query Country($id: ID!){
+    country(id: $id){
+        id
+        englishName
+    }
+}

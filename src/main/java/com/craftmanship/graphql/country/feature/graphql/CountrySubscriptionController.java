@@ -21,12 +21,16 @@ public class CountrySubscriptionController {
   @Scheduled(fixedRate = 5000) // every five seconds
   public void generateCountry() {
     final Country country = new Country.CountryBuilder()
-        .englishName(RandomStringUtils.randomAscii(6))
+        .englishName(RandomStringUtils.randomAscii(6).replaceAll("\\s+", "A"))
         .id(1L)
         .build();
 
     log.info("Generated country: {}", country);
     this.sink.tryEmitNext(country);
+  }
+
+  public void completeWorkDayFlux() {
+    this.sink.tryEmitComplete();
   }
 
   @SubscriptionMapping
